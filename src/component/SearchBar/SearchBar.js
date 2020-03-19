@@ -1,23 +1,66 @@
 import React from "react";
 import "./SearchBar.css";
 
-let sortByOptions = {
-    'Best Match': 'best_match',
-    'Highest Rated': 'rating',
-    'Most Reviewed': 'review_count',
-}
-
 export class SearchBar extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            term: "",
+            location: "",
+            sortBy: 'best_match'
+        }
+
+
+        this.handleLocationChange=this.handleLocationChange.bind(this)
+        this.handleTermChange=this.handleTermChange.bind(this)
+        this.handleSearch=this.handleSearch.bind(this)
+
+        this.sortByOptions = {
+            'Best Match': "best_match",
+            'Highest Rated': "rating",
+            'Most Reviewed': "review_count",
+        }
+    }
+    getSortByClass(sortByOption){
+        if (this.state.sortBy === sortByOption){
+            return "active";
+        } 
+        return "";
+    }
+    handleSortByChange(sortByOption){
+        this.setState({sortBy: sortByOption})
+    }
+    handleTermChange(event){
+        this.setState({
+            term: event.target.value
+        })
+    }
+    handleLocationChange(event){
+        this.setState({
+            location: event.target.value
+        })
+    }
+    handleSearch(event){
+        console.log(this.props);
+        this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
+        event.preventDefault();
+    }
     renderSortByOptions(){
-        let keys = Object.keys(sortByOptions);
+        let keys = Object.keys(this.sortByOptions);
 
         return keys.map(key =>{
-            let value = sortByOptions[key];
+            let value = this.sortByOptions[key];
             return (
-                <li key={value}>{key}</li>
+                <li className={this.getSortByClass(value)} 
+                    onClick={this.handleSortByChange.bind(this, value)} 
+                    key={value}>{key}
+                </li>
             );
         });
     }
+
+
+
     render(){
         return(
             <div className="SearchBar">
@@ -31,12 +74,12 @@ export class SearchBar extends React.Component {
 */}
                     </ul>
                 </div>
-                <div class="SearchBar-fields">
-                    <input placeholder="Search Businesses" />
-                    <input placeholder="Where?" />
+                <div className="SearchBar-fields">
+                    <input placeholder="Search Businesses" onChange={this.handleTermChange} />
+                    <input placeholder="Where?" onChange={this.handleLocationChange}/>
                 </div>
-                <div class="SearchBar-submit">
-                    <a>Let's Go</a>
+                <div className="SearchBar-submit">
+                    <a onClick={this.handleSearch}>Let's Go</a>
                 </div>
             </div>
         )
