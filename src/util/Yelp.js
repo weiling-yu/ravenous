@@ -15,13 +15,17 @@ function search (term, location, sortBy){
                         id: business.id,
                         imageSrc: business.image_url,
                         name: business.name,
-                        address: business.address,
+                        url: business.url,
+                        address: business.location.address1,
+                        location: business.location,
                         city: business.city,
                         state: business.state,
                         zipCode: business.zipCode,
-                        category: business.category,
+                        coordinates: business.coordinates,
+                        category: business.categories,
                         rating: business.rating,
-                        reviewCount: business.reviewCount
+                        reviewCount: business.review_count,
+                        displayPhone: business.display_phone
                     }
                 })
             }

@@ -21,6 +21,12 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .phone {
+    font-size: .50rem;
+    font-weight: 200;
+    line-height: 0.8rem;
+  }
   
   .Business-information p {
     font-size: .88rem;

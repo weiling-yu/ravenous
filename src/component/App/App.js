@@ -8,13 +8,15 @@ import Yelp from "../../util/Yelp";
 let business = {
   imageSrc: '',
   name: '',
+  location: {},
   address: '',
   city: '',
   state: '',
   zipCode: '',
   category: '',
   rating: '',
-  reviewCount: ''
+  reviewCount: '',
+  displayPhone: ""
 }
 
 let businesses = [];
